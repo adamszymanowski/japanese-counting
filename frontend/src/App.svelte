@@ -1,12 +1,12 @@
 <script>
-  import Counter from './lib/Counter.svelte'
+  import Keyboard from './lib/Keyboard.svelte'
 </script>
 
 <main>
-  <h1>Basic Counter:</h1>
+  <h1>Keyboard:</h1>
 
   <div class="card">
-    <Counter />
+    <Keyboard />
   </div>
 
 </main>
