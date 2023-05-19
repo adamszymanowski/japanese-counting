@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  frontend:
+    tty:
+      true
+    build:
+      context: ./frontend
+    ports:
+      - 8000:5000
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
+        # This is for Windows - when the container accesses a file, it gets the latest version. 
+        consistency: delegated
+      - node_modules:/app/node_modules
+      # expanded notation looks like this:
+      #- type: volume
+      #  source: node_modules
+      #  target: /app/node_modules
+
+
+volumes:
+  node_modules:
