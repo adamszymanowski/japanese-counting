@@ -3,7 +3,6 @@
 </script>
 
 <main>
-  <h1>Keyboard:</h1>
 
   <div class="card">
     <Keyboard />

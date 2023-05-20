@@ -1,25 +1,38 @@
 <script>
-    import FlickCircle from './FlickCircle.svelte';
+    import { keyPressed } from './state.js';
+    export let faceCharacter;
+    let element;
 
-    export let char;
-    export let selected = false;
-    
-    function handleClick() {
-      selected = true;
+    function handleMouseUp() {
+        element.style.background = 'radial-gradient(yellow, orange)';
+        keyPressed.set(faceCharacter);
     }
-    
-    function handleFlick() {
-      selected = false;
+    function handleMouseDown() {
+        element.style.background = 'radial-gradient(red, yellow)';
+        keyPressed.set('');
     }
 </script>
   
-<button on:click={handleClick} class:selected={selected}>
-    A
-    <!-- 
-    {#if selected}
-    TODO: Render FlickCircle after clicking a key.
-        <FlickCircle {char} on:flick={handleFlick} />
-    {/if}
-    -->
-</button>
+<div class="key" 
+    bind:this={element}
+    on:mouseup={handleMouseUp}
+    on:mousedown={handleMouseDown}
+    on:mouseleave={handleMouseDown}
+>
+    <div class="key_face">{faceCharacter}</div>
+</div>
   
+<style>
+    .key {
+        width: var(--key-size);
+        height: var(--key-size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(red, yellow);
+        transition: background 2s ease-in-out;
+    }
+    .key_face {
+        font-size: var(--core-radius);
+    }
+</style>

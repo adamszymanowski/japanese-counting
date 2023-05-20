@@ -20,12 +20,6 @@
   </div>
 
 <style>
-  :root {
-    --flick-radius: 8em;
-    --unit-radius: calc(var(--flick-radius)/7);
-    --core-radius: calc(var(--unit-radius) * 3);
-    --sub-radius: calc(var(--unit-radius) * 2);
-  }
   .flick_circle {
     width: var(--flick-radius);
     height: var(--flick-radius);
