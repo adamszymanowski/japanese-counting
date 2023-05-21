@@ -1,7 +1,8 @@
 <script>
     import FlickCircle from './FlickCircle.svelte';
     import Key from './Key.svelte';
-    import { keyPressed } from './state.js';
+    import { keyPressed, handleChoiceClose } from './shared.js';
+    let element;
 
     const createInputCharacters = (characterArray) => {
         return { 
@@ -23,80 +24,21 @@
     const characterSets = [aSet, kaSet, saSet, taSet, naSet, haSet, maSet, yaSet, raSet];
   </script>
   
-<div class="keyboard">
-    {#if $keyPressed === aSet.core}
-        <FlickCircle inputCharacters={aSet} />
-    {:else}
-      <div></div>
-    {/if}
-
-    {#if $keyPressed === kaSet.core}
-    <FlickCircle inputCharacters={kaSet} />
-    {:else}
-        <div></div>
-    {/if}
-
-    {#if $keyPressed === saSet.core}
-        <FlickCircle inputCharacters={saSet} />
-    {:else}
-        <div></div>
-    {/if}
-
-
-    {#if $keyPressed === taSet.core}
-        <FlickCircle inputCharacters={taSet} />
-    {:else}
-        <Key faceCharacter={aSet.core} />
-    {/if}
-
-    {#if $keyPressed === naSet.core}
-        <FlickCircle inputCharacters={naSet} />
-    {:else}
-        <Key faceCharacter={kaSet.core} />
-    {/if}
-
-    {#if $keyPressed === haSet.core}
-        <FlickCircle inputCharacters={haSet} />
-    {:else}
-        <Key faceCharacter={saSet.core} />
-    {/if}
-
-
-    {#if $keyPressed === maSet.core}
-        <FlickCircle inputCharacters={maSet} />
-    {:else}
-        <Key faceCharacter={taSet.core} />
-    {/if}
-
-    {#if $keyPressed === yaSet.core}
-        <FlickCircle inputCharacters={yaSet} />
-    {:else}
-        <Key faceCharacter={naSet.core} />
-    {/if}
-
-    {#if $keyPressed === raSet.core}
-        <FlickCircle inputCharacters={raSet} />
-    {:else}
-        <Key faceCharacter={haSet.core} />
-    {/if}
-    <!--
+<div class="keyboard" bind:this={element} on:mouseleave={handleChoiceClose(element)}>
     {#each characterSets as characters}
-        <div>
+        {#if $keyPressed === characters.core}
             <FlickCircle inputCharacters={characters} />
-        </div>
+        {:else}
+            <Key faceCharacter={characters.core} />
+        {/if}
     {/each}   
-{#each characterSets as characters}
-    <div>
-        <Key faceCharacter={characters.core} />
-    </div>
-{/each}
--->
+
 </div>
 
 <style>
     .keyboard {
         display: grid;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
     }
 </style>

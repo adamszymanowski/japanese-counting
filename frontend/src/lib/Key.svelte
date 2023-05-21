@@ -1,25 +1,25 @@
 <script>
-    import { keyPressed } from './state.js';
+    import { keyPressed, handleChoiceClose } from './shared.js';
+    import { get } from 'svelte/store';
     export let faceCharacter;
     let element;
 
-    function handleMouseUp() {
+    function handleChoiceOpen() {
         element.style.background = 'radial-gradient(yellow, orange)';
         keyPressed.set(faceCharacter);
+        console.log('hello');
     }
-    function handleMouseDown() {
-        element.style.background = 'radial-gradient(red, yellow)';
-        keyPressed.set('');
-    }
+
 </script>
   
-<div class="key" 
+<div class="key"
     bind:this={element}
-    on:mouseup={handleMouseUp}
-    on:mousedown={handleMouseDown}
-    on:mouseleave={handleMouseDown}
+    on:mouseout|stopPropagation={handleChoiceClose(element)}
+    on:mouseenter|stopPropagation={handleChoiceClose(element)}
 >
-    <div class="key_face">{faceCharacter}</div>
+    <div class="key_face"
+        on:mouseup={handleChoiceOpen}
+    >{faceCharacter}</div>
 </div>
   
 <style>
@@ -34,5 +34,8 @@
     }
     .key_face {
         font-size: var(--core-radius);
+        border-radius: 100%;
+        background: radial-gradient(magenta, red);
+
     }
 </style>
