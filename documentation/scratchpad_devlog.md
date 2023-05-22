@@ -2,6 +2,12 @@
 frontend setup:
 - `docker run -v ${PWD}:/app -w /app node:14.18 yarn create vite frontend --template svelte`
 
+webserver basic setup:
+- `docker build -t my-nginx .`
+- `docker run -it --rm -d -p 8888:80 --name web my-nginx`
+- `docker stop web`
+- [How to use the official nginx docker image](https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/)
+
 - **OBSOLETE**:
 - `pushd frontend`
 - `docker run -v ${PWD}:/app -w /app node:14 npx degit sveltejs/template svelte-app`
