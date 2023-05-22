@@ -1,6 +1,11 @@
 version: '3.7'
 
 services:
+  webserver:
+    build:
+      context: ./webserver
+    ports:
+    - 8888:80
   frontend:
     tty:
       true
