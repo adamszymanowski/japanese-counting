@@ -3,19 +3,19 @@ version: '3.7'
 services:
   webserver:
     build:
-      context: ./webserver
+      context: ./application/webserver
     ports:
     - 8888:80
   frontend:
     tty:
       true
     build:
-      context: ./frontend
+      context: ./application/frontend/
     ports:
       - 8000:5000
     volumes:
       - type: bind
-        source: ./frontend
+        source: ./application/frontend
         target: /app
         # This is for Windows - when the container accesses a file, it gets the latest version. 
         consistency: delegated
