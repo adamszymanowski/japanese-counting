@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  webserver:
+    build:
+      context: ./application
+      dockerfile: ../production.dockerfile
+    volumes:
+      - ./application/frontend:/app
+      - node_modules:/app/node_modules
+
+    ports:
+    - 8888:80
+
+volumes:
+  node_modules:
