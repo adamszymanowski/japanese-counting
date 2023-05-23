@@ -7,6 +7,16 @@ services:
       dockerfile: development.dockerfile
     ports:
     - 8888:80
+
+  backend:
+    build:
+      context: ./application/backend
+      dockerfile: development.dockerfile
+    ports:
+      - 8800:8000
+    volumes:
+      - ./application/backend:/usr/src/app
+
   frontend:
     tty:
       true
