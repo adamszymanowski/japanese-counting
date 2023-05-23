@@ -4,13 +4,15 @@ services:
   webserver:
     build:
       context: ./application/webserver
+      dockerfile: development.dockerfile
     ports:
     - 8888:80
   frontend:
     tty:
       true
     build:
-      context: ./application/frontend/
+      context: ./application/frontend
+      dockerfile: development.dockerfile
     ports:
       - 8000:5000
     volumes:
