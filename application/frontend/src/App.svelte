@@ -1,8 +1,24 @@
 <script>
   import Keyboard from './lib/Keyboard.svelte'
+
+  let message = "";
+
+  async function getMessage() {
+    try {
+      const response = await fetch('http://localhost:8800/development_message');
+      const data = await response.json();
+      message = data.message;
+    } catch (error) {
+      console.error('An error occurred:', error);
+      message = 'Failed to load development message.';
+    }
+  }
+
+  getMessage();
 </script>
 
 <main>
+  <p>{message}</p>
 
   <div class="card">
     <Keyboard />

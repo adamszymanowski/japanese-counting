@@ -12,14 +12,16 @@ services:
     build:
       context: ./application/backend
       dockerfile: development.dockerfile
+    environment:
+      - APPLICATION_ENVIRONMENT=DEVELOPMENT
     ports:
       - 8800:8000
     volumes:
       - ./application/backend:/usr/src/app
 
   frontend:
-    tty:
-      true
+    depends_on:
+      - backend
     build:
       context: ./application/frontend
       dockerfile: development.dockerfile
