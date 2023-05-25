@@ -8,7 +8,26 @@ services:
     ports:
     - 8888:80
 
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    ports:
+      - 6379:6379
+
+  populate_redis:
+    depends_on: 
+      - redis
+    build:
+      context: ./application/redis
+      dockerfile: populate_redis.dockerfile
+    volumes:
+      - ./application/redis:/app
+
   backend:
+    depends_on:
+      - populate_redis
     build:
       context: ./application/backend
       dockerfile: development.dockerfile
@@ -42,3 +61,4 @@ services:
 
 volumes:
   node_modules:
+  redis_data:

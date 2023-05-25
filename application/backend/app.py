@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+import redis
 from os import getenv
 
+# Fast API setup
 app = FastAPI()
 
 env_var = "APPLICATION_ENVIRONMENT"
@@ -20,9 +22,19 @@ if development:
         allow_headers=["*"],
     )
 
+# prepare data
+data = {}
+data[env_var] = application_environment
+
+# redis
+redis_client = redis.Redis(host='redis', port=6379, db=0)
+for i in range(1,4):
+    number = str(i)
+    data[number] = redis_client.get(number)
+
 @app.get("/")
 def read_root():
-    return {env_var: application_environment}
+    return data
 
 
 @app.get("/development_message")
