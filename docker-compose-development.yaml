@@ -38,6 +38,17 @@ services:
     volumes:
       - ./application/backend:/usr/src/app
 
+  test:
+    depends_on:
+      - backend
+    build:
+      context: ./application/backend
+      dockerfile: test.dockerfile
+    environment:
+      - APPLICATION_ENVIRONMENT=DEVELOPMENT
+    volumes:
+      - ./application/backend:/usr/src/app
+
   frontend:
     depends_on:
       - backend

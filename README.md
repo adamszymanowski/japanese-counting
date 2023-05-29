@@ -6,6 +6,6 @@ Brief description moved to `./documetation/design_doc.md`
 - `docker-compose -f docker-compose-development.yaml up`
 
 TODO:
-- how to run
+- develompent/test environment needs to be way more *robust* than it is, but we'll get there... eventualy.
 - architecture
 - readme description
