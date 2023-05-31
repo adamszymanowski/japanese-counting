@@ -28,9 +28,7 @@ data[env_var] = application_environment
 
 # redis
 redis_client = redis.Redis(host='redis', port=6379, db=0)
-for i in range(1,4):
-    number = str(i)
-    data[number] = redis_client.get(number)
+data["1"] = redis_client.get("1")
 
 @app.get("/")
 def read_root():

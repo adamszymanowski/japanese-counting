@@ -16,4 +16,5 @@ RUN pip install --no-cache-dir -r requirements_tests.txt
 # Copy project
 COPY *.py .
 
-CMD ["pytest", "./"]
+#CMD ["pytest", "./"]
+CMD ["ptw", "--poll"]
